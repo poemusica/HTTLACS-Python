@@ -19,8 +19,7 @@ def get_user_input(): #get number of legs from user.
         else:
             return int(user_input)
 
-#creates and sets up the drawing screen.
-def make_screen():
+def make_screen(): #create and set up the drawing screen.
     #set up screen and pen (turtle).
     wn = turtle.Screen()
     wn.title ('Let\'s make a sprite!')
@@ -28,15 +27,13 @@ def make_screen():
     wn.screensize(canvwidth=200, canvheight=200, bg=gen_hex_color())
     wn.setup(width=300, height=300)
 
-#creates a turtle (pen).
-def make_turtle():
+def make_turtle(): #create a turtle (pen).
     t = turtle.Turtle()
     t.pen(speed=9, shown=False, resizemode='user', stretchfactor=(0.75, 0.75), outline=1)
     t.shape('classic')
     return t
 
-
-def draw_sprite(n, t):
+def draw_sprite(n, t): #all the magic happens here.
     #calculate angle between legs.
     angle = 360.0/n #reminder: angle must be floating point! use 360.0 for Python 2.
 
