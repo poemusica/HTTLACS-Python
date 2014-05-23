@@ -1,6 +1,7 @@
 import turtle #drawing 
 import random #for generating random hex colors
 
+#=======================================================
 
 def gen_hex_color(): #generate a random hex color.
     color = ['#']
@@ -18,27 +19,27 @@ def get_user_input(): #get number of legs from user.
         else:
             return int(user_input)
 
-def sprite_gen(): #draw sprite (using a single Turtle).
-    
+#creates and sets up the drawing screen.
+def make_screen():
     #set up screen and pen (turtle).
     wn = turtle.Screen()
     wn.title ('Let\'s make a sprite!')
     #making the screensize smaller than the setup dimensions, gets rid of the scroll bar.
     wn.screensize(canvwidth=200, canvheight=200, bg=gen_hex_color())
     wn.setup(width=300, height=300)
+
+#creates a turtle (pen).
+def make_turtle():
     t = turtle.Turtle()
-    t.speed(9)
+    t.pen(speed=9, shown=False, resizemode='user', stretchfactor=(0.75, 0.75), outline=1)
     t.shape('classic')
-    t.ht()
-    t.shapesize(0.75, 0.75, 1)
+    return t
 
-    #ask user for number of sprite legs.
-    n = get_user_input()
 
+def draw_sprite(n, t):
     #calculate angle between legs.
     angle = 360.0/n #reminder: angle must be floating point! use 360.0 for Python 2.
 
-    
     #the drawing loop 
     for i in range(n + 1):
         t.color(gen_hex_color())
@@ -49,13 +50,23 @@ def sprite_gen(): #draw sprite (using a single Turtle).
             
         #draw legs and stamp the tips
         else:   
-            t.forward(100)
+            t.fd(100)
             t.stamp()
-            t.backward(100)
-            t.left(angle)
+            t.bk(100)
+            t.lt(angle)
 
-    #user can click to exit window 
-    wn.exitonclick()
+def main(): #draw sprite (using a single Turtle).
+    
+    make_screen() #create drawing screen.
 
-#Let's do this!
-sprite_gen()
+    t = make_turtle() #create a turtle (pen).
+    
+    n = get_user_input() #ask user for number of sprite legs.
+
+    draw_sprite(n, t) #draw the sprite.
+
+    turtle.mainloop()
+
+#=======================================================
+#let's do this!
+main()
